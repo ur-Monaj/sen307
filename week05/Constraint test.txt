@@ -1,0 +1,23 @@
+Testing the contraints 
+
+mysql> INSERT INTO Department (dept_name) VALUES (NULL);
+ERROR 1048 (23000): Column 'dept_name' cannot be null
+
+mysql> INSERT INTO Department (dept_name) VALUES (NULL);
+ERROR 1048 (23000): Column 'dept_name' cannot be null
+
+mysql> INSERT INTO Student (matric_no, full_name, dept_id) VALUES ('TEST001', 'Test', 999);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sen307_11303`.`student`, CONSTRAINT `student_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`))
+mysql> INSERT INTO Student (matric_no, full_name, gender) VALUES ('TEST002', 'Test', 'X');
+ERROR 1265 (01000): Data truncated for column 'gender' at row 1
+ERROR 1265 (01000): Data truncated for column 'gender' at row 1
+
+unique test 
+mysql> INSERT INTO Department (dept_name)
+    -> VALUES ('Computer Science');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Department (dept_name)
+    -> VALUES ('Computer Science');
+ERROR 1062 (23000): Duplicate entry 'Computer Science' for key 'department.dept_name'
+
